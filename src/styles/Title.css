@@ -1,0 +1,10 @@
+.blurb {
+    color: black;
+    display: flex;
+    font-size: 25px;
+    text-align: center;
+}
+
+.blurb1, .blurb2, .blurb3 {
+    margin: 20px;
+}
