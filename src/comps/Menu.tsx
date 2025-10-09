@@ -1,7 +1,7 @@
 import "./../styles/Menu.css"
-import type { MenuProp, MonkeyReturn } from "../types.ts";
+import type { MenuProp } from "../types.ts";
 
-function Menu ({numOfMonkeys, setNumOfMonkeys, textChoice, setTextChoice, onStart}: MenuProp) {
+function Menu ({numOfMonkeys, setNumOfMonkeys, setTextChoice, onStart}: MenuProp) {
 
     const handleClick0 = () => {
         // Should change apps text to Macbeth

@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+# Many Monkeys
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+There is an idea that if you gave a monkey a type writer and infinite time,
+eventually that monkey would reproduce Shakespeare.
+Many Monkeys explores that idea further.
+To try it out, click here
+[ManyMonkeys](https://techncik.github.io/ManyMonkeys/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **React + TypeScript** frontend.
+- **Web Worker** to handle the CPU-intense simulation without freezing the UI
+- Responsive design and conditional rendering for menu, loading, and result screen
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How It Works
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. User inputs:
+    - Number of monkeys to simulate.
+    - Text choice (Macbeth, Romeo and Juliet, Hamlet).
+2. On clicking **Run**, the app:
+    - Switches to a loading screen.
+    - Spawns a **web worker** to perform the heavy computation on a separate thread.
+    - Ensures a run time of at least 5 seconds to ensure no spamming
+3. The worker simulates each monkey typing random letters until a mismatch with the chosen text occurs:
+    - We track the monkey with the longest matching sequence
+    - Return the best monkey and their sequence to the main app thread
+4. Show the finish screen where we display:
+    - The best monkey
+    - The best sentence
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://guthub.com/techncik/ManyMonkeys.git
+cd ManyMonkeys
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+3. Run the app locally:
+
+```bash
+npm run dev
+```
+
+## Notes and Considerations
+
+- Currently the app only uses 1 additional core. In the future I will add the ability to use extra cores to speed up large computations
+- Extremely large numbers may still take a while to compute. Anything over 1 billion had a noticable impact on performance. Play with large numbers at your own risk

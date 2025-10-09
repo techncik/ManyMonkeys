@@ -5,7 +5,9 @@ import FinishScreen from "./comps/FinishScreen.tsx";
 import "./styles/App.css"
 import { useState } from "react";
 import type { AppState, MonkeyReturn } from "./types.ts";
-import runMonkeys from "./generator.ts";
+
+// Create web worker
+const monkeyWorker = new URL("./worker.ts", import.meta.url);
 
 
 // Helper function to create a mandatory 5 second delay between runs
@@ -32,20 +34,27 @@ function App() {
 
         // Show loading screen and start calculation timer
         setState(1);
-        const start = Date.now();
-
-        // Make those monkeys type
-        const result:MonkeyReturn = await runMonkeys(numOfMonkeys ,textChoice);
-
-        // If the calculation takes less than 5 seconds, make the app wait
-        // until 5 seconds has passed, then show the results on end page
-        const elapsed = Date.now() - start;
-        const remaining = 5000 - elapsed;
-        if (remaining > 0) {
-            await sleep (remaining);
-        }
-        setResults(result);
-        setState(2);
+        requestAnimationFrame(async () => {
+            
+            // Start timing the execution
+            const start = Date.now();
+            // Create web worker instance to handle calculations
+            const worker = new Worker(monkeyWorker, {type: "module"});
+            worker.onmessage = async (event) => {
+                
+                // Make sure at least 5 seconds has passed before showing the results
+                const elapsed = Date.now() - start;
+                const remaining = 5000 - elapsed;
+                if (remaining > 0) {
+                    await sleep (remaining);
+                }
+                // When worker is finished, display the results                
+                setResults(event.data);
+                setState(2);
+                worker.terminate();
+            };
+            worker.postMessage({numOfMonkeys:numOfMonkeys, textChoice:textChoice});
+        })
     }
 
     // Function used entirely to return to menu from end screen
