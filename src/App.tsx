@@ -67,18 +67,14 @@ function App() {
     if (state == 0) { 
         return (
             <div className="start-screen">
-                <div className="title-div">
-                    <Title></Title>
-                </div>
-                <div className="menu-container">
-                    <Menu
+                <Title></Title>
+                <Menu
                     numOfMonkeys={numOfMonkeys}
                     setNumOfMonkeys={setNumOfMonkeys}
                     textChoice={textChoice}
                     setTextChoice={setTextChoice}
-                    onStart={handleRun}
-                    ></Menu>
-                </div>    
+                    onStart={handleRun}>
+                </Menu>
             </div>
             );
         };
@@ -95,9 +91,10 @@ function App() {
         return (
             <div className="finish-screen">
                 <FinishScreen 
-                results={results}
-                onStart={handleRun}
-                onFinish={handleMenu}></FinishScreen>
+                    results={results}
+                    onStart={handleRun}
+                    onFinish={handleMenu}>
+                </FinishScreen>
             </div>
         )
     }    

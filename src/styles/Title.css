@@ -1,10 +1,19 @@
 .blurb {
-    color: black;
+    height: 20%;
+    margin: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-radius: 1px;
+    border-style: dotted;
+    border-radius: 10px;
+
     display: flex;
-    font-size: 25px;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
 .blurb1, .blurb2, .blurb3 {
-    margin: 20px;
+    font-size: 36px;
+    color: rgb(87, 59, 21);
+
 }

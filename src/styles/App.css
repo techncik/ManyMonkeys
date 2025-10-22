@@ -1,32 +1,39 @@
-body {
-    background-color: #f8e473;
+html, body {
+    
     background-image: url("/src/assets/pixil-frame-0.png");
     background-repeat: no-repeat;
     background-position: 100% 30%;
-    background-size: 70%;
+    background-size: 55%;
+    
 
+    background-color: #f8e473;
+    
+    height:100%;
+    margin: 0;
+    padding: 0;
 
+    
+
+}
+/* Start screen related CSS  */
+.start-screen {
     display: flex;
     flex-direction: column;
-    vertical-align: center;
-    justify-content: flex-start;
+    height: 100vh;
+}
+
+
+
+/* Loading screen related CSS */
+.loading-screen {
+
+}
+
+/* Finish screen related CSS */
+
+.finish_screen {
 
 
 }
 
-
-.app-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding-top: 2rem;
-
-}
-
-
-.menu-container {
-    width: 50%;
-}
 

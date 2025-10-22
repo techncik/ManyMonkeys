@@ -17,29 +17,28 @@ function Menu ({numOfMonkeys, setNumOfMonkeys, setTextChoice, onStart}: MenuProp
     }
     return (
         <>
-            <div className="menu-div">
-                <div className="monkey-num-text-div">
-                    How many helpers does monkey need?
-                </div>
-                <div className="monkey-num-input-div">
+            <div className="menu">
+
+                <div className="row-inline">
+                    <span>How many monkeys?</span>
                     <input
                         type="number"
                         value={numOfMonkeys}
                         onChange={(e) => setNumOfMonkeys(Number(e.target.value))}/>
                 </div>
-                <div className="text-choice-div">
+
+                <div className="text-choice">
                     Pick your Shakespeare Text
                 </div>
-                <div className="text-options-div">
+
+                <div className="text-buttons">
                     <button onClick= {handleClick0} className="opt0">Macbeth</button>
                     <button onClick= {handleClick1} className="opt1">Romeo and Juliet</button>
                     <button onClick= {handleClick2} className="opt2">Hamlet</button>
                 </div>
-                <div className="start-button">
-                    <button className="monkey-button" onClick={onStart}>
-                        Go
-                    </button>
-                </div>
+
+                <button className="monkey-button" onClick={onStart}>Go</button>
+                
             </div>
         </>
     )
